@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy import MetaData
 from databaseconfig import db
+from models import Admin
+from endpoints.admin_api import admin
 
 
 app = Flask(__name__)
@@ -17,6 +19,8 @@ db.init_app(app)
 @app.route('/')
 def index():
     return '<h3>Nexin LTD</h3>'
+
+app.add_url_rule('/admin', 'admin', admin, methods=['GET', 'POST'])
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

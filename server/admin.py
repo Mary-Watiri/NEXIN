@@ -29,7 +29,7 @@ class Admin(db.Model):
     def validate_phone_number(self, key, phone_number):
         if phone_number and not all(c.isdigit() or c in '- ()' for c in phone_number):
             raise ValueError("Phone number must contain only digits and standard separators (dashes, spaces).")
-        if len(phone_number) >= 15:
+        if len(phone_number) >= 10:
             raise ValueError("Phone number must be less than 15")
         
         return phone_number
