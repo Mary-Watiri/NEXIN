@@ -19,6 +19,23 @@ with app.app_context():
 
     # Add clients and tasks to the session
     db.session.add_all([client1, client2, task1, task2])
+    
+
+    # Commit the session to the database
+    db.session.commit()
+from models import User  # Import your User model (assuming it's defined in models.py)
+
+def seed_database():
+    # Create some sample users
+    users = [
+        User(username='user1', email='user1@example.com', password='password1'),
+        User(username='user2', email='user2@example.com', password='password2'),
+        # Add more users as needed
+    ]
+
+    # Add users to the session
+    for user in users:
+        db.session.add(user)
 
     # Commit the session to the database
     db.session.commit()
