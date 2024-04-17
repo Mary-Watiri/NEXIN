@@ -13,7 +13,7 @@ class Admin(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
        
     tasks = db.relationship("Task", back_populates="admin")
-    clients = db.relationship("Client", back_populates="admin")  # Note the plural form
+    clients = db.relationship("Client", back_populates="admin") 
     tickets = db.relationship("Ticket", back_populates="assign_to")
     
     @validates('first_name', 'last_name')
