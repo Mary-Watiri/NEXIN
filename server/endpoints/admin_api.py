@@ -22,24 +22,23 @@ def admin():
     elif request.method == 'POST':
         
         data = request.get_json()
-        new_admin = Admin(
-            first_name=data.get('first_name'),
-            last_name=data.get('last_name'),
-            user_name=data.get('user_name'),
-            position=data.get('position'),
-            phone_number=data.get('phone_number'),
-            email=data.get('email')
-        )
-        db.session.add(new_admin)
+        first_name=data.get('first_name'),
+        last_name=data.get('last_name'),
+        user_name=data.get('user_name'),
+        position=data.get('position'),
+        phone_number=data.get('phone_number'),
+        email=data.get('email')
+        admin = Admin(first_name=first_name, last_name=last_name, user_name=user_name, position=position, phone_number=phone_number, email=email)
+        db.session.add(admin)
         db.session.commit()
         inserted_admin = {
-            'staff_id': new_admin.staff_id,
-            'first_name': new_admin.first_name,
-            'last_name': new_admin.last_name,
-            'user_name': new_admin.user_name,
-            'position': new_admin.position,
-            'phone_number': new_admin.phone_number,
-            'email': new_admin.email
+            'staff_id': admin.staff_id,
+            'first_name': admin.first_name,
+            'last_name': admin.last_name,
+            'user_name': admin.user_name,
+            'position': admin.position,
+            'phone_number': admin.phone_number,
+            'email': admin.email
         }
         return jsonify(inserted_admin), 201
     
@@ -49,7 +48,9 @@ def admin():
         if admin:
             db.session.delete(admin)
             db.session.commit()
-            return 'Admin deleted'
+            return f"Client with ID {staff_id} deleted"
+        else:
+            return f"Client with ID {staff_id} not found", 404
         
 
                 
