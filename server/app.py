@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy import MetaData
 from databaseconfig import db
-from models import Admin, Tickets, Client
 from endpoints.client_api import clients
 from endpoints.tickets_api import tickets
 from endpoints.admin_api import admin
