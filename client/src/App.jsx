@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import { UpdateTheme,UseTheme } from "./Theme";
+import Bar from "./components/Charts/BarChart";
+import SideBar from "./components/SideBar";
+import TopNav from "./components/TopNav";
+import { Routes, Route } from "react-router-dom"
+import Pie from "./components/Charts/PieChart";
+import Line from "./components/Charts/Line";
+import FAQ from "./components/FAQ";
+import Form from './components/Form';
+import TeamTable from './components/TeamTable';
+import ContactInformation from "./components/ContactInformation";
+import Dashboard from "./components/Dashboard";
+import MyCalendar from "./components/Calendar";
+import Item from "./components/Item";
+function App () {
+  const darkTheme=UseTheme() //usetheme hook
+  const toggleColor=UpdateTheme() //button hook
+  //create the themes
+  const ThemeStyles={
+    backgroundColor:darkTheme?"rgb(10,10,30)":"rgb(240,250,250)",
+    color:darkTheme?"rgb(230,220,220)":"rgb(10,10,30)",
+    
+  }
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+    <div className="app overflow-hidden" style={ThemeStyles}>
+      <SideBar/>
+    <main className="content">
+      <TopNav toggleColor={toggleColor} darkTheme={darkTheme}/> 
+      {/* Routes */}
+      <Routes>
+        <Route path="/Bar" element={<Bar ThemeStyles={ThemeStyles}/>}/>
+        <Route path="/Pie" element={<Pie/>}/>
+        <Route path="/Line" element={<Line/>}/>
+        <Route path="/FAQ" element={<FAQ ThemeStyles={ThemeStyles}/>}/>
+        <Route path="/Team" element={<TeamTable/>}/>
+        <Route path="/Profile" element={<Form ThemeStyles={ThemeStyles} />}/>
+        <Route path="/" element={<Dashboard ThemeStyles={ThemeStyles}/>}/>
+        <Route path="/Calendar" element={<MyCalendar/>}/>
+        <Route path="/Item" element={<Item ThemeStyles={ThemeStyles}/>}/>
+        <Route path="/Profile" element={<Form />}/>
+        <Route path="/Contacts" element={<ContactInformation ThemeStyles={ThemeStyles} />}/>
+      </Routes> 
+      </main>
+     
+     </div>
+
+  
   )
 }
 
-export default App
+export default App;
