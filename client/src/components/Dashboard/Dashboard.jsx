@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
-import { Box, IconButton, Button } from '@mui/material';
+import { useState } from 'react';
+import { Box, Button, } from '@mui/material';
 import MarkEmailReadOutlinedIcon from '@mui/icons-material/MarkEmailReadOutlined';
 import PointOfSaleOutlinedIcon from '@mui/icons-material/PointOfSaleOutlined';
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
-import TicketForm from './TicketForm';
+import { Bar } from '@mui/material';
+import PropTypes from 'prop-types';
+import TicketForm from './Ticketform';
 import TicketList from './TicketList';
 
 const Dashboard = ({ ThemeStyles }) => {
   const [tickets, setTickets] = useState([]);
 
+  
+
   const handleCreateTicket = (newTicket) => {
     setTickets([...tickets, { id: tickets.length + 1, ...newTicket }]);
+    Dashboard.propTypes = {
+      ThemeStyles: PropTypes.object.isRequired,
+    };
   };
 
   const ticketQuantityPerCounty = [
@@ -29,8 +36,7 @@ const Dashboard = ({ ThemeStyles }) => {
           <h1 className="text-3xl font-bold mb-4">NEXIN LTD</h1>
           <h2 className="text-2xl font-semibold mb-8 text-emerald-600">WELCOME TO THE TICKETING SYSTEM</h2>
         </div>
-        {/* download documents */}
-        <DownloadPDF />
+        
       </Box>
 
       <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 mb-2">
@@ -98,7 +104,7 @@ const Dashboard = ({ ThemeStyles }) => {
         <Box class="p-5 mr-2 overflow-y-scroll h-60 w-1/3 position-fixed scroll-">
           {/* Recent Tickets */}
           <div className="bg-cyan-950 text-center justify-center flex h-12 align-middle">
-            <h2 class="text-slate-100 p-3 w-100">
+            <h2 className="text-slate-100 p-3 w-100">
               Recent Tickets
             </h2>
           </div>

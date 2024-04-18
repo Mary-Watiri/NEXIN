@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { UseTheme } from "./Theme";
+import SideBar from "./components/Dashboard/SideBar";
+import { Routes, Route } from "react-router-dom";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const darkTheme = UseTheme(); //usetheme hook
+
+  //create the themes
+  const ThemeStyles = {
+    backgroundColor: darkTheme? "rgb(10,10,30)" : "rgb(240,250,250)",
+    color: darkTheme? "rgb(230,220,220)" : "rgb(10,10,30)",
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="app overflow-hidden" style={ThemeStyles}>
+        <SideBar />
+        <main className="content">
+          {/* Routes */}
+          <Routes>
+            <Route path="/" element={<Dashboard ThemeStyles={ThemeStyles} />}/>
+          </Routes>
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
