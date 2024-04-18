@@ -12,8 +12,6 @@ class Admin(db.Model):
     phone_number = db.Column(db.String)
     email = db.Column(db.String(120), unique=True, nullable=False)
        
-    # tasks = db.relationship("Task", back_populates="admin") 
-    # tickets = db.relationship("Ticket", back_populates="admin")
     
     @validates('first_name', 'last_name')
     def validate_name(self, key, name):

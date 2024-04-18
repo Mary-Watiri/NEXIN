@@ -9,7 +9,7 @@ def admin():
         admin_list = []
         for admin in admin:
             admin_list.append({
-                'staff_id': admin.staff_id,
+                'id': admin.id,
                 'first_name': admin.first_name,
                 'last_name': admin.last_name,
                 'user_name': admin.user_name,
@@ -32,7 +32,7 @@ def admin():
         db.session.add(admin)
         db.session.commit()
         inserted_admin = {
-            'staff_id': admin.staff_id,
+            'id': admin.id,
             'first_name': admin.first_name,
             'last_name': admin.last_name,
             'user_name': admin.user_name,
@@ -43,11 +43,12 @@ def admin():
         return jsonify(inserted_admin), 201
     
     elif request.method == 'DELETE':
-        staff_id = request.args.get('staff_id')
-        admin = Admin.query.filter_by(staff_id=staff_id).first()
+        admin_id = request.args.get('id')
+        admin = Admin.query.get(admin_id)
         if admin:
             db.session.delete(admin)
             db.session.commit()
-            return f"Client with ID {staff_id} deleted"
+            return f"Client with ID {admin_id} deleted"
         else:
-            return f"Client with ID {staff_id} not found", 404
+            return f"Client with ID {admin_id} not found", 404
+        
